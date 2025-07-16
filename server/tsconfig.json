@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "outDir": "./dist",  // The output will be placed in the `server/dist` folder
+    "rootDir": "./src",   // The root folder for TypeScript source files
+    "baseUrl": "./src"
+  },
+  "include": ["src/**/*.ts"],  // Include all `.ts` files in the `server/src/` folder
+  "exclude": ["node_modules"]  // Exclude node_modules
+}

@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { User } from '../models/User';
 import { MikroORM } from '@mikro-orm/core';
-import ormConfig from '../ormconfig';
+import ormConfig from '../mikro-orm.config';
 
 const JWT_SECRET = process.env.JWT_SECRET;
 if (!JWT_SECRET) {

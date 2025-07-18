@@ -1,7 +1,7 @@
 // src/utils/orm.ts
 
 import { MikroORM } from '@mikro-orm/core';
-import ormConfig from './ormconfig';
+import ormConfig from './mikro-orm.config';
 
 let orm: MikroORM | null = null;
 

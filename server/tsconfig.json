@@ -12,6 +12,6 @@
     "rootDir": "./src",   // The root folder for TypeScript source files
     "baseUrl": "./src"
   },
-  "include": ["src/**/*.ts", "src/ormconfig.ts"],  // Include all `.ts` files in the `server/src/` folder
+  "include": ["src/**/*.ts", "src/mikro-orm.config.ts", "src/migrations/**/*.ts"],  // Include all `.ts` files in the `server/src/` folder
   "exclude": ["node_modules"]  // Exclude node_modules
 }

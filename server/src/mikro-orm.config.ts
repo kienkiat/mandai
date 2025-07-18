@@ -5,6 +5,7 @@ import { User } from './models/User';
 import { Order } from './models/Order';
 import { OrderItem } from './models/OrderItem';
 import { Inventory } from './models/Inventory';
+import { CartItem } from './models/CartItem';
 
 export default defineConfig({
   dbName: process.env.DB_NAME || 'products',
@@ -14,7 +15,7 @@ export default defineConfig({
   port: Number(process.env.DB_PORT) || 5432,
   // entities: ['./dist/models'],
   // entitiesTs: ['./src/models'],
-  entities: [Product, User, Order, OrderItem, Inventory],
+  entities: [Product, User, Order, OrderItem, Inventory, CartItem],
   debug: true,
   migrations: {
     path: './src/migrations',

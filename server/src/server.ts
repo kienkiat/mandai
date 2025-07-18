@@ -7,12 +7,16 @@ import { getOrm } from './orm';
 
 import productRoutes from './routes/productRoutes';
 import authRoutes from './routes/authRoutes';
+import cartRoutes from './routes/cartRoutes';
+import orderRoutes from './routes/orderRoute';
 
 const app = express();
 app.use(express.json());
 
 app.use('/api', productRoutes);
 app.use('/api', authRoutes);
+app.use('/api', cartRoutes);
+app.use('/api', orderRoutes);
 
 const startServer = async () => {
   try {

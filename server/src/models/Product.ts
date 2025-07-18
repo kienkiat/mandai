@@ -1,5 +1,9 @@
 import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
 
+export enum ProductStatus {
+  Active = 1,
+  Inactive = 2,
+}
 @Entity({ tableName: 'products' })
 export class Product {
   @PrimaryKey()
@@ -15,7 +19,7 @@ export class Product {
   price!: number;
 
   @Property()
-  status!: number;
+  status!: ProductStatus;
 
   @Property({ type: 'timestamp', defaultRaw: 'CURRENT_TIMESTAMP' })
   createdAt?: Date;

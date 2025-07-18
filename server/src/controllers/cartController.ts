@@ -9,10 +9,6 @@ import { getOrm } from '../orm';
 export const updateCartItem = async (req: AuthRequest, res: Response) => {
     const { productId, type, quantity } = req.body;
 
-    if (!['add', 'minus', 'remove'].includes(type)) {
-        return errorResponse(res, 'Invalid type. Must be add, minus, or remove', 400);
-    }
-
     try {
         const orm = await getOrm();
         const em = orm.em.fork();
@@ -60,7 +56,7 @@ export const updateCartItem = async (req: AuthRequest, res: Response) => {
             return errorResponse(res, 'Cart item not found', 404);
         }
         await em.persistAndFlush(cartItem);
-        successResponse(res, cartItem);
+        successResponse(res, cartItem, undefined, 'Cart item updated successfully');
     } catch (err) {
         console.error('Update cart item error:', err);
         errorResponse(res, 'Internal server error');
@@ -76,7 +72,7 @@ export const getCart = async (req: AuthRequest, res: Response) => {
         const orm = await getOrm();
         const em = orm.em.fork();
         const items = await em.find(CartItem, { user: req.user!.userId }, { populate: ['product'] });
-        successResponse(res, items);
+        successResponse(res, items, undefined, 'Cart items fetched successfully');
     } catch (err) {
         console.error('Get cart error:', err);
         errorResponse(res, 'Internal server error');

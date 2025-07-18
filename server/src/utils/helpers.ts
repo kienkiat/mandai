@@ -16,9 +16,10 @@ export const withEm = async (fn: (em: EntityManager) => Promise<void>) => {
 /**
  * Helper to send a success response
  */
-export const successResponse = (res: Response, data: any, status: number = 200) => {
+export const successResponse = (res: Response, data: any, status: number = 200, message?: string) => {
   return res.status(status).json({
     status: 'success',
+    message: message || undefined,
     data,
   });
 };

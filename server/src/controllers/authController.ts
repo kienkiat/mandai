@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import { User } from '../models/User';
 import { MikroORM } from '@mikro-orm/core';
 import ormConfig from '../mikro-orm.config';
+import { successResponse, errorResponse } from '../utils/helpers';
 
 const JWT_SECRET = process.env.JWT_SECRET;
 if (!JWT_SECRET) {
@@ -44,14 +45,11 @@ export const signUp = async (req: any, res: any) => {
 
         const { password: _, ...userData } = user;
 
-        res.status(201).json({
-            message: 'User created successfully',
-            data: userData,
-            token,
-        });
+        return successResponse(res, { user: userData, token }, undefined, 'User created successfully');
+
     } catch (error) {
         console.error('Sign up error:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        errorResponse(res, 'Internal server error');
     }
 };
 
@@ -65,12 +63,12 @@ export const login = async (req: any, res: any) => {
         const user = await em.findOne(User, { email });
 
         if (!user) {
-            return res.status(400).json({ message: 'Invalid credentials' });
+            return errorResponse(res, 'Invalid credentials', 400);
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).json({ message: 'Invalid credentials' });
+            return errorResponse(res, 'Invalid credentials', 400);
         }
 
         const token = jwt.sign(
@@ -81,13 +79,9 @@ export const login = async (req: any, res: any) => {
 
         const { password: _, ...userData } = user;
 
-        res.json({
-            message: 'Login successful',
-            token,
-            data: userData,
-        });
+        return successResponse(res, { user: userData, token }, undefined, 'Login successful');
     } catch (error) {
         console.error('Login error:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        return errorResponse(res, 'Internal server error', 500);
     }
 };

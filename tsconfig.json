@@ -12,15 +12,15 @@
       "rootDir": "./server/src",                // Set the root directory to server/src
       "baseUrl": "./server/src",                // Base directory for module resolution
       "paths": {
-        "*": ["node_modules/*"]                 // Resolve module paths from `node_modules`
+        "*": ["node_modules/*"]                 
       }
     },
     "include": [
-      "server/src/**/*.ts"  // Include all `.ts` files inside `server/src/`
-    ],
+      "server/src/**/*.ts"
+, "server/src/ormconfig.ts"    ],
     "exclude": [
       "node_modules", 
-      "dist"  // Exclude `node_modules` and `dist` directories from the build
+      "dist"
     ]
   }
   

@@ -1,6 +1,6 @@
 import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
 
-@Entity()
+@Entity({ tableName: 'users' })
 export class User {
   @PrimaryKey()
   id!: number;
@@ -18,5 +18,5 @@ export class User {
   role!: string;
 
   @Property({ type: 'timestamp', defaultRaw: 'CURRENT_TIMESTAMP' })
-  createdAt!: Date;
+  createdAt?: Date;
 }

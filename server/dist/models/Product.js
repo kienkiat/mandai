@@ -32,7 +32,7 @@ __decorate([
 ], Product.prototype, "price", void 0);
 __decorate([
     (0, core_1.Property)(),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], Product.prototype, "status", void 0);
 __decorate([
     (0, core_1.Property)({ type: 'timestamp', defaultRaw: 'CURRENT_TIMESTAMP' }),

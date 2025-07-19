@@ -1,0 +1,40 @@
+
+.header {
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #ccc;
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    height: 60px;
+  }
+  
+  .menuButton {
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+  }
+  
+  .title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-size: 1.4rem;
+    color: #333;
+  }
+  
+  .titleLink {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .main {
+    padding: 2rem 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  

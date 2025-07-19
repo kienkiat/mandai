@@ -18,6 +18,7 @@ import {
     updateProductSchema,
     updateInventorySchema,
 } from '../validators/productValidators';
+import { upload } from '../middleware/upload'; 
 
 const router = express.Router();
 
@@ -26,7 +27,7 @@ router.get('/products', getProducts);
 router.get('/products/:id', getProductById);
 
 // Admin-only routes with validation
-router.post('/products', authenticate, authorizeAdmin, validate(createProductSchema), createProduct);
+router.post('/products', authenticate, authorizeAdmin, upload.single('image'), createProduct);
 router.put('/products/:id', authenticate, authorizeAdmin, validate(updateProductSchema), updateProduct);
 router.delete('/products/:id', authenticate, authorizeAdmin, deleteProduct);
 

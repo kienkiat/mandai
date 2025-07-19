@@ -21,6 +21,10 @@ export class Product {
   @Property()
   status!: ProductStatus;
 
+  @Property({ nullable: true })
+  imageUrl?: string;
+
   @Property({ type: 'timestamp', defaultRaw: 'CURRENT_TIMESTAMP' })
   createdAt?: Date;
+  
 }

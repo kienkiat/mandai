@@ -8,7 +8,7 @@ import { Inventory } from '../models/Inventory';
 
 export const getProducts = async (req: Request, res: Response) => {
   const page = Number(req.query.page) || 1;
-  const limit = Number(req.query.limit) || 10;
+  const limit = Number(req.query.limit) || 1;
   const offset = (page - 1) * limit;
   try {
     const orm = await getOrm();
@@ -48,16 +48,20 @@ export const getProductById = async (req: Request, res: Response) => {
 
 export const createProduct = async (req: Request, res: Response) => {
   const { name, description, price, status } = req.body;
+  const file = req.file;
 
   try {
     const orm = await getOrm();
     const em = orm.em.fork(); // Scoped entity manager
     
+    const imageUrl = file ? `/uploads/${file.filename}` : undefined;
+
     const newProduct = em.create(Product, {
       name,
       description,
       price,
-      status,
+      status: status ? Number(status) : 1,
+      imageUrl,
     });
 
     await em.persistAndFlush(newProduct);

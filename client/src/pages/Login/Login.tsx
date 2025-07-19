@@ -1,16 +1,19 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { loginUser } from '../api/authApi';
-
-
+import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import { loginUser } from '../../api/authApi';
+import styles from './Login.module.css';
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useAuth();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
+  const from = location.state?.from || '/';
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,42 +22,44 @@ const Login = () => {
     try {
       const res = await loginUser({ email, password });
       login(res.token, res.data);
-      navigate('/');
+      navigate(from, { replace: true });
     } catch (err: any) {
       setError(err.response?.data?.message || 'Login failed');
     }
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: '0 auto', padding: '2rem' }}>
-      <h2>Login</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+    <div className={styles.container}>
+      <h2 className={styles.title}>Login</h2>
+      {error && <p className={styles.error}>{error}</p>}
 
-      <form onSubmit={handleLogin}>
-        <div style={{ marginBottom: '1rem' }}>
+      <form className={styles.form} onSubmit={handleLogin}>
+        <div className={styles.formGroup}>
           <label>Email</label>
           <input
             type="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
             required
-            style={{ width: '100%' }}
           />
         </div>
 
-        <div style={{ marginBottom: '1rem' }}>
+        <div className={styles.formGroup}>
           <label>Password</label>
           <input
             type="password"
             value={password}
             onChange={e => setPassword(e.target.value)}
             required
-            style={{ width: '100%' }}
           />
         </div>
 
-        <button type="submit">Login</button>
+        <button type="submit" className={styles.button}>Login</button>
       </form>
+
+      <p className={styles.signup}>
+        New user? <Link to="/signup" className={styles.signupLink}>Sign up now!</Link>
+      </p>
     </div>
   );
 };

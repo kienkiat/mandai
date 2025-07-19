@@ -1,5 +1,10 @@
+
+.navbar {
+  background-color: #003400;
+  padding: 1rem;
+}
 .header {
-    background-color: #f5f5f5;
+  background-color: #003400;
     padding: 1rem 1.5rem;
     display: flex;
     justify-content: space-between;

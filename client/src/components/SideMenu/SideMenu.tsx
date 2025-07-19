@@ -1,6 +1,6 @@
 // src/components/SideMenu.tsx
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import styles from './SideMenu.module.css';
 
 interface SideMenuProps {

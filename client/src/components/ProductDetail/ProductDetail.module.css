@@ -1,0 +1,56 @@
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  
+  .name {
+    font-size: 1.8rem;
+    color: #003400;
+    margin-bottom: 1rem;
+  }
+  
+  .images {
+    width: 100%;
+    max-height: 1000px;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+  
+  .description {
+    font-size: 1rem;
+    color: #003400;
+    margin-bottom: 1rem;
+  }
+  
+  .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #003400;
+  }
+  .backButton {
+    background-color: #003400;
+    color: #FBEBCE;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  .addToCartButton {
+    background-color: #003400;
+    color: #FBEBCE;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    margin-top: 1rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  
+  

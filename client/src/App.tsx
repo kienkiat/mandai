@@ -3,12 +3,13 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 
-import ProductList from './pages/ProductList';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
+import ProductList from './pages/ProductList/ProductList';
+import Login from './pages/Login/Login';
+import Signup from './pages/SignUp/SignUp';
+import ProductDetail from './pages/ProductDetail/ProductDetail';
 
-import SideMenu from './components/SideMenu';
-import styles from './components/App.module.css';
+import SideMenu from './components/SideMenu/SideMenu';
+import styles from './styles/App.module.css';
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -39,6 +40,7 @@ function App() {
             <Route path="/" element={<ProductList />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/products/:id" element={<ProductDetail />} />
           </Routes>
         </main>
       </Router>

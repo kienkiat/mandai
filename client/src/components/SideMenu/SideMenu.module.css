@@ -5,7 +5,7 @@
     left: 0;
     width: 260px;
     height: 100%;
-    background-color: #ffffff;
+    background-color: #FBEBCE;
     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
     padding: 2rem 1.5rem;
     z-index: 1000;
@@ -22,7 +22,7 @@
     top: 1rem;
     right: 1rem;
     font-size: 1.4rem;
-    background: none;
+    background: #003400;
     border: none;
     cursor: pointer;
   }
@@ -39,8 +39,8 @@
   
   .menuLink {
     text-decoration: none;
-    color: #333;
-    font-size: 1rem;
+    font-weight: 600;
+    color: #003400;
     transition: color 0.2s ease;
   }
   

@@ -1,8 +1,8 @@
 
 .header {
     padding: 1rem 2rem;
-    border-bottom: 1px solid #ccc;
-    background-color: #f9f9f9;
+    border-bottom: 1px solid #003400;
+    background-color: #FBEBCE;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -12,7 +12,7 @@
   
   .menuButton {
     font-size: 1.5rem;
-    background: none;
+    background: #003400;
     border: none;
     cursor: pointer;
     z-index: 2;
@@ -29,7 +29,6 @@
   
   .titleLink {
     text-decoration: none;
-    color: #333;
   }
   
   .main {

@@ -3,16 +3,25 @@
 import { Request, Response } from 'express';
 import { Product } from '../models/Product';
 import { getOrm } from '../orm';
-import { successResponse, errorResponse } from '../utils/helpers';
+import { successResponse, errorResponse, paginatedResponse } from '../utils/helpers';
 import { Inventory } from '../models/Inventory';
 
 export const getProducts = async (req: Request, res: Response) => {
+  const page = Number(req.query.page) || 1;
+  const limit = Number(req.query.limit) || 10;
+  const offset = (page - 1) * limit;
   try {
     const orm = await getOrm();
     const em = orm.em.fork(); // Scoped entity manager
     
-    const products = await em.find(Product, {});
-    successResponse(res, products, undefined, 'Products fetched successfully');
+    const [products, total] = await em.findAndCount(Product, {}, {
+      limit,
+      offset,
+      orderBy: { createdAt: 'DESC' },
+    });
+
+    paginatedResponse(res, products, total, page, limit, 'Products fetched successfully');
+  
   } catch (error) {
     console.error('Get products error:', error);
     errorResponse(res, 'Internal server error');

@@ -63,10 +63,6 @@ export const updateCartItem = async (req: AuthRequest, res: Response) => {
     }
 };
 
-
-
-
-// View cart items
 export const getCart = async (req: AuthRequest, res: Response) => {
     try {
         const orm = await getOrm();
@@ -78,3 +74,35 @@ export const getCart = async (req: AuthRequest, res: Response) => {
         errorResponse(res, 'Internal server error');
     }
 };
+export const clearCart = async (req: AuthRequest, res: Response) => {
+    try {
+        const orm = await getOrm();
+        const em = orm.em.fork();
+
+        await em.nativeDelete(CartItem, { user: req.user!.userId });
+
+        successResponse(res, null, undefined, 'Cart cleared successfully');
+    } catch (err) {
+        console.error('Clear cart error:', err);
+        errorResponse(res, 'Internal server error');
+    }
+};
+
+export const getCartSummary = async (req: AuthRequest, res: Response) => {
+    try {
+        const orm = await getOrm();
+        const em = orm.em.fork();
+
+        const items = await em.find(CartItem, { user: req.user!.userId }, { populate: ['product'] });
+
+        const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
+        const totalPrice = items.reduce((sum, item) => sum + item.quantity * item.product.price, 0);
+
+        successResponse(res, { totalItems, totalPrice }, undefined, 'Cart summary fetched successfully');
+    } catch (err) {
+        console.error('Get cart summary error:', err);
+        errorResponse(res, 'Internal server error');
+    }
+};
+
+

@@ -1,5 +1,6 @@
-import { Entity, PrimaryKey, Property, ManyToOne } from '@mikro-orm/core';
+import { Entity, PrimaryKey, Property, ManyToOne, OneToMany, Collection } from '@mikro-orm/core';
 import { User } from './User';
+import { OrderItem } from './OrderItem';
 
 @Entity({ tableName: 'orders' })
 export class Order {
@@ -17,4 +18,8 @@ export class Order {
 
   @Property({ default: 1 })
   status!: number;
+
+  @OneToMany(() => OrderItem, orderItem => orderItem.order)
+  orderItems = new Collection<OrderItem>(this);
+
 }

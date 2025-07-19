@@ -37,9 +37,10 @@ export const errorResponse = (res: Response, message: string, status: number = 5
 /**
  * Helper to send a response with paginated results
  */
-export const paginatedResponse = (res: Response, data: any, total: number, page: number, limit: number) => {
+export const paginatedResponse = (res: Response, data: any, total: number, page: number, limit: number, message = 'Fetched successfully') => {
   return res.status(200).json({
     status: 'success',
+    message,
     data,
     pagination: {
       total,

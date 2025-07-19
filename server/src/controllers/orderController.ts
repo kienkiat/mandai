@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { withEm, successResponse, errorResponse } from '../utils/helpers';
+import { withEm, successResponse, errorResponse, paginatedResponse } from '../utils/helpers';
 import { AuthRequest } from '../middleware/authMiddleware';
 import { CartItem } from '../models/CartItem';
 import { Order } from '../models/Order';
@@ -46,6 +46,73 @@ export const createOrderFromCart = async (req: AuthRequest, res: Response) => {
         successResponse(res, { message: 'Order created successfully', orderId: order.id });
     } catch (err) {
         console.error('Create order error:', err);
+        errorResponse(res, 'Internal server error');
+    }
+};
+
+export const getUserOrders = async (req: AuthRequest, res: Response) => {
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 10;
+    const offset = (page - 1) * limit;
+    try {
+        const orm = await getOrm();
+        const em = orm.em.fork();
+
+        const [orders, total] = await em.findAndCount(Order, {
+            user: req.user!.userId,
+        }, {
+            populate: ['orderItems.product'],
+            limit,
+            offset,
+            orderBy: { orderDate: 'DESC' },
+        });
+
+        paginatedResponse(res, orders, total, page, limit, 'Orders fetched successfully');
+    } catch (err) {
+        console.error('Get user orders error:', err);
+        errorResponse(res, 'Internal server error');
+    }
+};
+
+export const getUserOrderById = async (req: AuthRequest, res: Response) => {
+    const { id } = req.params;
+    try {
+        const orm = await getOrm();
+        const em = orm.em.fork();
+
+        const order = await em.findOne(Order, { id: +id, user: req.user!.userId }, {
+            populate: ['orderItems.product'],
+        });
+
+        if (!order) {
+            return errorResponse(res, 'Order not found', 404);
+        }
+
+        successResponse(res, order, undefined, 'Order details fetched');
+    } catch (err) {
+        console.error('Get user order by ID error:', err);
+        errorResponse(res, 'Internal server error');
+    }
+};
+
+export const getAllOrdersAdmin = async (req: Request, res: Response) => {
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 10;
+    const offset = (page - 1) * limit;
+    try {
+        const orm = await getOrm();
+        const em = orm.em.fork();
+
+        const [orders, total] = await em.findAndCount(Order, {}, {
+            populate: ['user', 'orderItems.product'],
+            limit,
+            offset,
+        });
+
+        paginatedResponse(res, orders, total, page, limit, 'All orders fetched successfully');
+
+    } catch (err) {
+        console.error('Get all orders (admin) error:', err);
         errorResponse(res, 'Internal server error');
     }
 };

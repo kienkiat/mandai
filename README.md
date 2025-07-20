@@ -34,6 +34,7 @@ A full-stack web application for managing products and enabling end-users to bro
     - JWT Authentication
     - MikroORM
     - PostgreSQL
+    - Jest
 
     Folder Structure (Frontend)
     Mandai/client/src
@@ -55,6 +56,7 @@ A full-stack web application for managing products and enabling end-users to bro
     ├── validators/
     ├── utils/
     ├── uploads/
+    ├── tests/
     └── orm.ts
     └── mikro-orm.config.ts
     └── server.ts
@@ -110,9 +112,6 @@ A full-stack web application for managing products and enabling end-users to bro
     - admin: Full CRUD access on products
     - user: Can browse and buy products
 
-    License
-    MIT License © [Teo Kien Kiat]
-
     Acknowledgments
     - React
     - Express
@@ -126,6 +125,9 @@ A full-stack web application for managing products and enabling end-users to bro
     - OrderItem
     - Product
     - User
+    
+    License
+    MIT License © [Teo Kien Kiat]
 
 <img width="2540" height="1291" alt="image" src="https://github.com/user-attachments/assets/b4945385-ea62-4200-85c2-29f0459d8204" />
 <img width="2542" height="1286" alt="Screenshot 2025-07-21 at 5 12 34 AM" src="https://github.com/user-attachments/assets/a5177484-6a74-42df-aaaa-a071be933ddd" />

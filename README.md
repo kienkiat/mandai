@@ -126,3 +126,6 @@ A full-stack web application for managing products and enabling end-users to bro
     - OrderItem
     - Product
     - User
+
+    <img width="2540" height="1291" alt="image" src="https://github.com/user-attachments/assets/b4945385-ea62-4200-85c2-29f0459d8204" />
+

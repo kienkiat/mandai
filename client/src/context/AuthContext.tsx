@@ -1,6 +1,6 @@
 
 import { createContext, useState, useEffect, useContext, ReactNode } from 'react';
-import axios from '../api/axios';
+import {jwtDecode} from 'jwt-decode';
 
 export interface AuthUser {
   user: any;
@@ -16,14 +16,18 @@ interface AuthContextType {
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
+interface DecodedToken {
+  userId: number;
+  role: string;
+  exp: number;
+  iat: number;
+}
 
-// Provider component
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<AuthUser | null>(null);
 
   const login = (token: string, user: AuthUser) => {
     localStorage.setItem('token', token);
-    console.log(token);
     setUser(user.user);
   };
 
@@ -35,15 +39,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      axios.get('/me', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }).then(res => {
-        setUser(res.data.user);
-      }).catch(() => {
+      try {
+        const decoded = jwtDecode<DecodedToken>(token);
+        if (decoded.exp * 1000 < Date.now()) {
+          logout();
+        } else {
+          setUser({
+            id: decoded.userId,
+            username: '',
+            email: '', 
+            role: decoded.role,
+            user: null,
+          });
+        }
+      } catch {
         logout();
-      });
+      }
     }
   }, []);
 
@@ -54,7 +65,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-// Optional helper hook
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) throw new Error('useAuth must be used within AuthProvider');

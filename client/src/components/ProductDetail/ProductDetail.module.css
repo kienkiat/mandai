@@ -1,6 +1,6 @@
 .container {
     max-width: 800px;
-    margin: 2rem auto;
+    margin: 0.5rem auto;
     padding: 1rem;
     border-radius: 8px;
   }
@@ -35,7 +35,6 @@
     color: #FBEBCE;
     border: none;
     padding: 0.5rem 1rem;
-    margin-bottom: 1rem;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.2s ease;

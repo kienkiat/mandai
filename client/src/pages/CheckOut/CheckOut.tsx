@@ -1,5 +1,5 @@
 import { useCart } from '../../context/CartContext';
-import { addToCart, placeOrder } from '../../api/cartApi';
+import { addToCart, placeOrder, clearCart } from '../../api/cartApi';
 import styles from './CheckOut.module.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -26,13 +26,40 @@ const Checkout = () => {
         }
     };
 
+    const handleRemoveItem = async (productId: number) => {
+        try {
+            setLoading(true);
+            await addToCart(productId, 1, 'remove');
+            await refreshCart();
+        } catch (err) {
+            console.error(err);
+            setError('Failed to remove item.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleClearCart = async () => {
+        setLoading(true);
+        setError('');
+        try {
+            await clearCart();
+            await refreshCart();
+            toast.success('Cart cleared successfully!', { className: 'toast-success-custom' });
+        } catch (err) {
+            setError('Failed to clear cart. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const handlePlaceOrder = async () => {
         setLoading(true);
         setError('');
         try {
             const res = await placeOrder();
             await refreshCart(); // Clear the cart
-            toast.success('Order placed successfully!', {className: 'toast-success-custom'});
+            toast.success('Order placed successfully!', { className: 'toast-success-custom' });
             navigate('/orders');
         } catch (err) {
             setError('Failed to place order. Please try again.');
@@ -83,10 +110,25 @@ const Checkout = () => {
                                             </button>
                                         </div>
                                         <span>Price: ${(product.price * quantity).toFixed(2)}</span>
+                                        <button
+                                            className={styles.removeBtn}
+                                            onClick={() => handleRemoveItem(product.id)}
+                                            disabled={loading}
+                                        >
+                                            Remove
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         ))}
+
+                        <button
+                            className={styles.clearAllButton}
+                            onClick={handleClearCart}
+                            disabled={loading || !items.length}
+                        >
+                            {loading ? 'Clearing Cart...' : 'Clear All'}
+                        </button>
                     </div>
 
                     {summary && (

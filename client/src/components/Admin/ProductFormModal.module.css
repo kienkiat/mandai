@@ -14,7 +14,7 @@
 }
 
 .modal {
-    background-color: #fff;
+    background-color: #f5f0e6;
     padding: 2rem 2.5rem;
     border-radius: 8px;
     width: 90%;
@@ -46,7 +46,6 @@
     border-radius: 5px;
     font-size: 1rem;
     transition: border-color 0.2s ease-in-out;
-    background-color: #fbebce;
 }
 
 .form input:focus,

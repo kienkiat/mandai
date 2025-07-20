@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import styles from './CartMenu.module.css';
-import { getCartItems, addToCart } from '../../api/cartApi';
+import { getCartItems, addToCart, clearCart } from '../../api/cartApi';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
+import { useAuth } from '../../context/AuthContext';
+import binIcon from '../../assets/bin.svg';
+
 
 interface Product {
   id: number;
@@ -29,6 +32,7 @@ const CartMenu = ({ isOpen, onClose }: CartMenuProps) => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { refreshCart } = useCart();
+  const { user } = useAuth();
 
   const fetchCart = async () => {
     setLoading(true);
@@ -46,9 +50,15 @@ const CartMenu = ({ isOpen, onClose }: CartMenuProps) => {
   };
 
   useEffect(() => {
-    if (!isOpen) return;
-    fetchCart();
-  }, [isOpen]);
+    if (!isOpen) {
+      if (!user) {
+        return;
+      }
+    }
+    if (user) {
+      fetchCart();
+    }
+  }, [isOpen, user]);
 
   const updateQuantity = async (productId: number, action: 'add' | 'minus') => {
     try {
@@ -62,6 +72,33 @@ const CartMenu = ({ isOpen, onClose }: CartMenuProps) => {
       setLoading(false);
     }
   };
+
+  const removeItem = async (productId: number) => {
+    try {
+      setLoading(true);
+      await addToCart(productId, 1, 'remove');
+      await fetchCart();
+    } catch (err) {
+      console.error(err);
+      setError('Failed to remove item from cart');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleClearCart = async () => {
+    try {
+      setLoading(true);
+      await clearCart();  // API call to clear cart
+      setItems([]); // Clear the items in the state as well
+    } catch (error) {
+      console.error(error);
+      setError('Failed to clear cart');
+    } finally {
+      setLoading(false);
+    }
+  };
+  
 
   const total = items
     .reduce((sum, item) => sum + parseFloat(item.product.price) * item.quantity, 0)
@@ -115,6 +152,15 @@ const CartMenu = ({ isOpen, onClose }: CartMenuProps) => {
                         +
                       </button>
                       <span>${(parseFloat(item.product.price) * item.quantity).toFixed(2)}</span>
+                      <button
+                        className={styles.removeButton}
+                        onClick={() => removeItem(item.product.id)}
+                        disabled={loading}
+                        aria-label={`Remove ${item.product.name} from cart`}
+                        title="Remove item"
+                      >
+                        <img src={binIcon} alt="Remove item" className={styles.removeIcon} />
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -127,6 +173,14 @@ const CartMenu = ({ isOpen, onClose }: CartMenuProps) => {
 
             <button className={styles.checkoutButton} onClick={handleCheckout}>
               Go to Checkout
+            </button>
+            <button
+              className={styles.clearAllButton}
+              onClick={handleClearCart}
+              disabled={loading || items.length === 0}
+              title="Clear all items from cart"
+            >
+              Clear All
             </button>
           </>
         )}

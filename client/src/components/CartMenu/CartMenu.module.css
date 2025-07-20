@@ -113,6 +113,7 @@
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-bottom: 1.5rem;
   }
   
   .quantityButton {
@@ -144,5 +145,49 @@
     text-align: center;
     font-weight: 600;
     color: #003400;
+  }
+  .removeButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    padding: 0;
+    user-select: none;
+    transition: filter 0.2s ease;
+    display: flex;
+    align-items: center;
+  }
+  
+  .removeButton:hover:not(:disabled) img {
+    filter: brightness(0.7);
+  }
+  
+  .removeButton:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  
+  .removeIcon {
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    display: block;
+  }
+  .clearAllButton {
+    background-color: #003400;
+    color: #FBEBCE;
+    font-weight: bold;
+    padding: 0.75rem 0;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .clearAllButton:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
   }
   

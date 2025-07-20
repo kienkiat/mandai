@@ -73,6 +73,13 @@ A full-stack web application for managing products and enabling end-users to bro
     (Frontend)
     cd client
     npm start
+    
+    (Default Admin Login)
+    After setting up your environment and database, run the following command to create a default admin user:
+    npm run seed
+    You can now log in using:
+    Email: admin@example.com
+    Password: admin123
 
     API Endpoints
     Auth:

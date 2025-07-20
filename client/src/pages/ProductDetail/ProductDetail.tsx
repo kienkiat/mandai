@@ -4,6 +4,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { addToCart } from '../../api/cartApi';
 import { fetchProductById } from '../../api/productApi';
+import { useCart } from '../../context/CartContext'; 
+import { toast } from 'react-toastify';
+import '../../styles/global.module.css';
 
 interface Product {
     id: number;
@@ -25,6 +28,7 @@ const ProductDetail = () => {
     const [quantity, setQuantity] = useState(1);
     const navigate = useNavigate();
     const { user } = useAuth();
+    const { refreshCart } = useCart();
 
     const handleAddToCart = async () => {
         if (!user) {
@@ -34,10 +38,11 @@ const ProductDetail = () => {
 
         try {
             await addToCart(product!.id, quantity);
-            alert('Product added to cart!');
+            await refreshCart();  
+            toast.success('Added to cart!', {className: 'toast-success-custom'});
         } catch (err) {
             console.error(err);
-            alert('Failed to add to cart');
+            toast.error('Failed to add to cart');
         }
     };
 

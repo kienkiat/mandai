@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { signupUser } from '../../api/authApi';
 import styles from './SignUp.module.css';
+import { toast } from 'react-toastify';
 
 const Signup = () => {
     const { login } = useAuth();
@@ -26,6 +27,7 @@ const Signup = () => {
         try {
             const res = await signupUser(form);
             login(res.data.token, res.data);
+            toast.success('Signup successfully!', {className: 'toast-success-custom'});
             navigate('/');
         } catch (err: any) {
             setError(err.response?.data?.message || 'Signup failed');

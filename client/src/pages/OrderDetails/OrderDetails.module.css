@@ -1,0 +1,84 @@
+/* src/pages/Orders/OrderDetails.module.css */
+.container {
+    padding: 2rem 1rem;
+    background-color: #FBEBCE;
+    color: #222;
+    min-height: 100vh;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  h1 {
+    color: #003400;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .date {
+    margin-bottom: 1.5rem;
+    color: #003400;
+    font-style: italic;
+  }
+  
+  .orderItems {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .itemCard {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .itemInfo {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .itemImage {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  .itemInfo h3 {
+    margin: 0 0 0.2rem;
+    color: #003400;
+  }
+  
+  .itemDetails {
+    margin-top: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    color: #003400;
+  }
+  
+  .summary {
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #003400;
+  }
+  
+  .backLink {
+    display: inline-block;
+    margin-top: 1.5rem;
+    text-decoration: none;
+    background-color: #003400;
+    color: #FBEBCE;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .info {
+    color: #003400;
+  }
+  

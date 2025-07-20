@@ -10,7 +10,11 @@ import ProductDetail from './pages/ProductDetail/ProductDetail';
 import styles from './styles/App.module.css';
 import Navbar from './components/Navbar/Navbar';
 import Checkout from './pages/CheckOut/CheckOut';
+import Order from './pages/Orders/Orders';
 import { CartProvider } from './context/CartContext';
+import OrderDetails from './pages/OrderDetails/OrderDetails';
+import { ToastContainer } from 'react-toastify';
+import './styles/ToastStyles.css';
 
 
 function App() {
@@ -26,9 +30,24 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/products/:id" element={<ProductDetail />} />
+              <Route path="/orders" element={<Order />} />
+              <Route path="/orders/:id" element={<OrderDetails />} />
               <Route path="/checkout" element={<Checkout />} />
             </Routes>
           </main>
+
+          <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="colored"
+          />
         </Router>
       </CartProvider>
     </AuthProvider>

@@ -13,3 +13,7 @@ export const getCartItems = async () => {
 export const getCartSummary = () => {
     return axios.get('/cart/summary');
 };
+
+export const placeOrder = async () => {
+    return await axios.post('/orders');
+  };

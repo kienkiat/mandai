@@ -1,0 +1,119 @@
+.container {
+  padding: 2rem 1rem;
+  background-color: #FBEBCE;
+  color: #222;
+  min-height: 100vh;
+}
+
+h1 {
+  text-align: center;
+  color: #003400;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.orderList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.orderCard {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #003400;
+}
+
+.header span {
+  margin-right: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.total {
+  font-size: 1.05rem;
+}
+
+.itemsPreview {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.previewItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.more {
+  margin-top: 0.3rem;
+  font-style: italic;
+  color: #555;
+}
+
+.detailsLink {
+  text-decoration: none;
+  color: #FBEBCE;
+  background-color: #003400;
+  text-align: center;
+  padding: 0.6rem 0;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.detailsLink:hover {
+  background-color: #005a00;
+}
+
+.pagination {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.pagination button {
+  background-color: #003400;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.itemImage {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 0.5rem;
+}
+
+.itemInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+span {
+  color: #003400;
+}

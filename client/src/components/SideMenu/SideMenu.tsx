@@ -2,6 +2,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import styles from './SideMenu.module.css';
+import { toast } from 'react-toastify';
 
 interface SideMenuProps {
   isOpen: boolean;
@@ -11,10 +12,12 @@ interface SideMenuProps {
 const SideMenu = ({ isOpen, onClose }: SideMenuProps) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  console.log(user);
 
   const handleLogout = () => {
     logout();
     onClose();
+    toast.success('Logout successfully!', {className: 'toast-success-custom'});
     navigate('/');
   };
 
@@ -24,6 +27,16 @@ const SideMenu = ({ isOpen, onClose }: SideMenuProps) => {
         ✕
       </button>
       <ul className={styles.menuList}>
+        {user && (
+          <li className={styles.menuItem} style={{ fontWeight: 'bold', color: '#003400', fontStyle: 'italic' }}>
+            Welcome back, {user.username}!
+          </li>
+        )}
+        <li className={styles.menuItem}>
+          <Link to="/" onClick={onClose} className={styles.menuLink}>
+            Home
+          </Link>
+        </li>
         {!user ? (
           <>
             <li className={styles.menuItem}>

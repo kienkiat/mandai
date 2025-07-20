@@ -3,6 +3,7 @@ import { createContext, useState, useEffect, useContext, ReactNode } from 'react
 import axios from '../api/axios';
 
 export interface AuthUser {
+  user: any;
   id: number;
   username: string;
   email: string;
@@ -23,7 +24,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = (token: string, user: AuthUser) => {
     localStorage.setItem('token', token);
     console.log(token);
-    setUser(user);
+    setUser(user.user);
   };
 
   const logout = () => {
@@ -34,8 +35,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      // Optional: verify token with backend
-      // For now, just keep user "logged in"
       axios.get('/me', {
         headers: {
           Authorization: `Bearer ${token}`,

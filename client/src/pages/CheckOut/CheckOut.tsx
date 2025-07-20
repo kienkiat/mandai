@@ -1,7 +1,9 @@
 import { useCart } from '../../context/CartContext';
-import { addToCart } from '../../api/cartApi';
+import { addToCart, placeOrder } from '../../api/cartApi';
 import styles from './CheckOut.module.css';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
@@ -9,6 +11,7 @@ const Checkout = () => {
     const { items, summary, refreshCart } = useCart();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     const updateQuantity = async (productId: number, action: 'add' | 'minus') => {
         try {
@@ -18,6 +21,22 @@ const Checkout = () => {
         } catch (err) {
             console.error(err);
             setError('Failed to update cart.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handlePlaceOrder = async () => {
+        setLoading(true);
+        setError('');
+        try {
+            const res = await placeOrder();
+            await refreshCart(); // Clear the cart
+            toast.success('Order placed successfully!', {className: 'toast-success-custom'});
+            navigate('/orders');
+        } catch (err) {
+            setError('Failed to place order. Please try again.');
+            toast.error('Failed to place order');
         } finally {
             setLoading(false);
         }
@@ -79,9 +98,10 @@ const Checkout = () => {
 
                     <button
                         className={styles.placeOrderBtn}
-                        disabled={!summary || summary.totalItems === 0}
+                        onClick={handlePlaceOrder}
+                        disabled={loading || !summary || summary.totalItems === 0}
                     >
-                        Place Order
+                        {loading ? 'Placing Order...' : 'Place Order'}
                     </button>
                 </>
             )}

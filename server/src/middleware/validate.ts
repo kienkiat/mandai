@@ -8,6 +8,6 @@ export const validate =
       const errors = result.error.flatten().fieldErrors;
       return res.status(400).json({ message: 'Validation error', errors });
     }
-    req.body = result.data; // optional: assign parsed data back
+    req.body = result.data;
     next();
   };

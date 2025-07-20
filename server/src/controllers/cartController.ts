@@ -5,7 +5,6 @@ import { withEm, successResponse, errorResponse } from '../utils/helpers';
 import { AuthRequest } from '../middleware/authMiddleware';
 import { getOrm } from '../orm';
 
-// Add product to cart
 export const updateCartItem = async (req: AuthRequest, res: Response) => {
     const { productId, type, quantity } = req.body;
 

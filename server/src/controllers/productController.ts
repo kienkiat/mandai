@@ -33,7 +33,7 @@ export const getProductById = async (req: Request, res: Response) => {
 
   try {
     const orm = await getOrm();
-    const em = orm.em.fork(); // Scoped entity manager
+    const em = orm.em.fork();
     
     const product = await em.findOne(Product, { id: +id });
     if (!product) {
@@ -52,7 +52,7 @@ export const createProduct = async (req: Request, res: Response) => {
 
   try {
     const orm = await getOrm();
-    const em = orm.em.fork(); // Scoped entity manager
+    const em = orm.em.fork();
     
     const imageUrl = file ? `/uploads/${file.filename}` : undefined;
 
@@ -85,7 +85,6 @@ export const updateProduct = async (req: Request, res: Response) => {
       return errorResponse(res, 'Product not found', 404);
     }
 
-    // Update product fields
     product.name = name || product.name;
     product.description = description || product.description;
     product.price = price || product.price;

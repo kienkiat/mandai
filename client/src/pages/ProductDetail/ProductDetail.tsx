@@ -1,9 +1,9 @@
-// src/pages/ProductDetail.tsx
 import { useEffect, useState } from 'react';
-import axios from '../../api/axios';
 import styles from '../../components/ProductDetail/ProductDetail.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { addToCart } from '../../api/cartApi';
+import { fetchProductById } from '../../api/productApi';
 
 interface Product {
     id: number;
@@ -22,6 +22,7 @@ const ProductDetail = () => {
     const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [quantity, setQuantity] = useState(1);
     const navigate = useNavigate();
     const { user } = useAuth();
 
@@ -32,10 +33,7 @@ const ProductDetail = () => {
         }
 
         try {
-            await axios.post('/cart', {
-                productId: product?.id,
-                quantity: 1,
-            });
+            await addToCart(product!.id, quantity);
             alert('Product added to cart!');
         } catch (err) {
             console.error(err);
@@ -44,20 +42,22 @@ const ProductDetail = () => {
     };
 
     useEffect(() => {
-        const fetchProduct = async () => {
-            try {
-                const res = await axios.get(`/products/${id}`);
-                setProduct(res.data.data);
-                console.log(res);
-            } catch (err) {
-                setError('Product not found');
-            } finally {
-                setLoading(false);
-            }
+        const loadProduct = async () => {
+          try {
+            const res = await fetchProductById(id!);
+            setProduct(res.data);
+          } catch {
+            setError('Product not found');
+          } finally {
+            setLoading(false);
+          }
         };
-
-        fetchProduct();
+    
+        loadProduct();
     }, [id]);
+
+    const increaseQuantity = () => setQuantity(q => q + 1);
+    const decreaseQuantity = () => setQuantity(q => (q > 1 ? q - 1 : 1));
 
     if (loading) return <p>Loading product details...</p>;
     if (error) return <p style={{ color: 'red' }}>{error}</p>;
@@ -78,10 +78,16 @@ const ProductDetail = () => {
             )}
             <p className={styles.description}>{product.description}</p>
             <div className={styles.price}>${parseFloat(product.price).toFixed(2)}</div>
+
+            <div className={styles.quantityContainer} style={{ margin: '1rem 0', display: 'flex', alignItems: 'center' }}>
+              <button onClick={decreaseQuantity} style={{ padding: '0.5rem', fontSize: '1.2rem' }}>−</button>
+              <span style={{ margin: '0 1rem', fontSize: '1.2rem' }}>{quantity}</span>
+              <button onClick={increaseQuantity} style={{ padding: '0.5rem', fontSize: '1.2rem' }}>+</button>
+            </div>
+
             <button className={styles.addToCartButton} onClick={handleAddToCart}>
                 Add to Cart
             </button>
-
         </div>
     );
 };

@@ -31,7 +31,7 @@ app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 const startServer = async () => {
   try {
-    await getOrm(); // Initialize DB connection once before starting the server
+    await getOrm(); //init db
     app.listen(3000, () => {
       console.log('Backend running on http://localhost:3000');
     });

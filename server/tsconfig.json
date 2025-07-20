@@ -9,9 +9,9 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "outDir": "./dist",  // The output will be placed in the `server/dist` folder
-    "rootDir": "./src",   // The root folder for TypeScript source files
+    "rootDir": "./src",
     "baseUrl": "./src"
   },
-  "include": ["src/**/*.ts", "src/mikro-orm.config.ts", "src/migrations/**/*.ts"],  // Include all `.ts` files in the `server/src/` folder
-  "exclude": ["node_modules"]  // Exclude node_modules
+  "include": ["src/**/*.ts", "src/mikro-orm.config.ts", "src/migrations/**/*.ts"],
+  "exclude": ["node_modules"]
 }

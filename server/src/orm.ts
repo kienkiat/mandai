@@ -1,14 +1,12 @@
-// src/utils/orm.ts
 
 import { MikroORM } from '@mikro-orm/core';
 import ormConfig from './mikro-orm.config';
 
 let orm: MikroORM | null = null;
 
-// Reusable instance of MikroORM
 export const getOrm = async (): Promise<MikroORM> => {
   if (!orm) {
-    orm = await MikroORM.init(ormConfig); // initialize ORM with config if not already initialized
+    orm = await MikroORM.init(ormConfig); 
   }
   return orm;
 };

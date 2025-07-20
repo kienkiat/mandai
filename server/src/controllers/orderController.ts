@@ -40,7 +40,6 @@ export const createOrderFromCart = async (req: AuthRequest, res: Response) => {
         order.totalPrice = totalPrice;
         await em.flush();
 
-        // Clear cart
         await em.nativeDelete(CartItem, { user: req.user!.userId });
 
         successResponse(res, { message: 'Order created successfully', orderId: order.id });

@@ -2,7 +2,7 @@ Product Management Application
 
 A full-stack web application for managing products and enabling end-users to browse and purchase them. The app supports role-based access for admins (CRUD operations on products) and users (shopping functionality).
 
-Features:
+    Features:
     Authentication & Authorization
     - JWT-based login and signup
     - Role-based access (admin, user)
@@ -21,7 +21,7 @@ Features:
     - Mobile-friendly design
     - Modern, clean layout using CSS Modules
 
-Tech Stack
+    Tech Stack
     Frontend:
     - React (TypeScript)
     - React Router
@@ -35,7 +35,7 @@ Tech Stack
     - MikroORM
     - PostgreSQL
 
-Folder Structure (Frontend)
+    Folder Structure (Frontend)
     Mandai/client/src
     ├── api/
     ├── components/
@@ -46,7 +46,7 @@ Folder Structure (Frontend)
     ├── styles/
     └── App.tsx
 
-Folder Structure (Backend)
+    Folder Structure (Backend)
     Mandai/server/src
     ├── controllers/
     ├── middleware/
@@ -59,7 +59,7 @@ Folder Structure (Backend)
     └── mikro-orm.config.ts
     └── server.ts
 
-Installation and running application
+    Installation and running application
     git clone https://github.com/kienkiat/mandai.git
     cd mandai
 
@@ -72,7 +72,7 @@ Installation and running application
     cd client
     npm start
 
-API Endpoints
+    API Endpoints
     Auth:
     | Method | Endpoint           | Description  |
     | ------ | ------------------ | -------------|
@@ -106,23 +106,26 @@ API Endpoints
     | POST   | `/api/orders`                | Create order           |
     | POST   | `/api/admin/orders` *(admin)*| Get all users' orders  |
 
- Roles
+     Roles
     - admin: Full CRUD access on products
     - user: Can browse and buy products
 
-License
+    License
     MIT License © [Teo Kien Kiat]
 
-Acknowledgments
+    Acknowledgments
     - React
     - Express
     - MikroORM
     - PostgreSQL
 
-Database Schemas
+    Database Schemas
     - CartItem
     - Inventory
     - Order
     - OrderItem
     - Product
     - User
+
+    <img width="2540" height="1291" alt="image" src="https://github.com/user-attachments/assets/b4945385-ea62-4200-85c2-29f0459d8204" />
+

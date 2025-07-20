@@ -15,6 +15,7 @@ export const getProducts = async (req: Request, res: Response) => {
     const em = orm.em.fork(); // Scoped entity manager
     
     const [products, total] = await em.findAndCount(Product, {}, {
+      populate: ['inventory'],
       limit,
       offset,
       orderBy: { createdAt: 'DESC' },
@@ -75,10 +76,13 @@ export const createProduct = async (req: Request, res: Response) => {
 export const updateProduct = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { name, description, price, status } = req.body;
+  const file = req.file;
 
   try {
     const orm = await getOrm();
     const em = orm.em.fork();
+
+    const imageUrl = file ? `/uploads/${file.filename}` : undefined;
 
     const product = await em.findOne(Product, { id: +id });
     if (!product) {
@@ -89,6 +93,7 @@ export const updateProduct = async (req: Request, res: Response) => {
     product.description = description || product.description;
     product.price = price || product.price;
     product.status = status || product.status;
+    product.imageUrl = imageUrl || product.imageUrl;
 
     await em.persistAndFlush(product);
     successResponse(res, product, undefined, 'Product updated successfully');

@@ -15,6 +15,7 @@ import { CartProvider } from './context/CartContext';
 import OrderDetails from './pages/OrderDetails/OrderDetails';
 import { ToastContainer } from 'react-toastify';
 import './styles/ToastStyles.css';
+import AdminProducts from './pages/AdminProducts/AdminProducts';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
               <Route path="/orders" element={<Order />} />
               <Route path="/orders/:id" element={<OrderDetails />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/admin/products" element={<AdminProducts />} />
             </Routes>
           </main>
 

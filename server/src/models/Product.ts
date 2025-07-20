@@ -1,4 +1,5 @@
-import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
+import { Entity, PrimaryKey, Property, OneToOne } from '@mikro-orm/core';
+import { Inventory } from './Inventory';
 
 export enum ProductStatus {
   Active = 1,
@@ -26,5 +27,9 @@ export class Product {
 
   @Property({ type: 'timestamp', defaultRaw: 'CURRENT_TIMESTAMP' })
   createdAt?: Date;
+
+  @OneToOne(() => Inventory, inventory => inventory.product, { mappedBy: 'product' })
+  inventory?: Inventory;
   
+
 }

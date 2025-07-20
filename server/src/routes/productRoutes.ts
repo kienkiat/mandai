@@ -28,7 +28,7 @@ router.get('/products/:id', getProductById);
 
 // Admin-only routes with validation
 router.post('/products', authenticate, authorizeAdmin, upload.single('image'), createProduct);
-router.put('/products/:id', authenticate, authorizeAdmin, validate(updateProductSchema), updateProduct);
+router.put('/products/:id', authenticate, authorizeAdmin,  upload.single('image'), updateProduct);
 router.delete('/products/:id', authenticate, authorizeAdmin, deleteProduct);
 
 router.get('/inventory', authenticate, authorizeAdmin, getInventory);

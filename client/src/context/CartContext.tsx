@@ -1,6 +1,7 @@
 
 import { createContext, useContext, useState, useEffect } from 'react';
 import { getCartItems, getCartSummary } from '../api/cartApi';
+import { useAuth } from '../context/AuthContext';
 
 interface CartItem {
   id: number;
@@ -39,6 +40,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [items, setItems] = useState<CartItem[]>([]);
   const [summary, setSummary] = useState<CartSummary | null>(null);
   const [cartCount, setCartCount] = useState(0);
+  const { user } = useAuth();
 
   const refreshCart = async () => {
     try {
@@ -61,6 +63,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
+    if (!user) return;
     refreshCart();
   }, []);
 

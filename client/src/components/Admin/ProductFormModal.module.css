@@ -1,0 +1,137 @@
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.modal {
+    background-color: #fff;
+    padding: 2rem 2.5rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 480px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.modal h2 {
+    color: #003400;
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form input,
+.form textarea,
+.form select {
+    padding: 0.6rem 0.8rem;
+    margin-bottom: 1rem;
+    border: 1.5px solid #003400;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.2s ease-in-out;
+    background-color: #fbebce;
+}
+
+.form input:focus,
+.form textarea:focus,
+.form select:focus {
+    outline: none;
+    border-color: #003400;
+    box-shadow: 0 0 6px #003400aa;
+}
+
+.form input[type='file'] {
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+}
+
+.imagePreview {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.imagePreview img {
+    max-height: 500px !important;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1.5px solid #ccc;
+    box-shadow: 0 0 5px #00340055;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.buttons button {
+    padding: 0.6rem 1.4rem;
+    font-weight: 600;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+}
+
+.buttons button[type='submit'] {
+    background-color: #003400;
+    color: #fbebce;
+}
+
+.buttons button[type='submit']:hover {
+    background-color: #005000;
+}
+
+.buttons button[type='button'] {
+    background-color: #ccc;
+    color: #333;
+}
+
+.buttons button[type='button']:hover {
+    background-color: #bbb;
+}
+
+.inputError {
+    border-color: #d93025;
+}
+
+.inputError:focus {
+    box-shadow: 0 0 6px #d93025aa;
+}
+
+.select {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    margin-bottom: 1rem;
+    border: 1.5px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #fff;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.select:focus {
+    outline: none;
+    border-color: #003400;
+    box-shadow: 0 0 6px #003400aa;
+}

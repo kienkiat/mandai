@@ -12,12 +12,11 @@ interface SideMenuProps {
 const SideMenu = ({ isOpen, onClose }: SideMenuProps) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  console.log(user);
 
   const handleLogout = () => {
     logout();
     onClose();
-    toast.success('Logout successfully!', {className: 'toast-success-custom'});
+    toast.success('Logout successfully!', { className: 'toast-success-custom' });
     navigate('/');
   };
 
@@ -37,6 +36,13 @@ const SideMenu = ({ isOpen, onClose }: SideMenuProps) => {
             Home
           </Link>
         </li>
+        {user?.role === 'admin' && (
+          <li className={styles.menuItem}>
+            <Link to="/admin/products" onClick={onClose} className={styles.menuLink}>
+              Manage Products
+            </Link>
+          </li>
+        )}
         {!user ? (
           <>
             <li className={styles.menuItem}>
